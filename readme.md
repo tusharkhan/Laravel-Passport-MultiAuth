@@ -17,7 +17,7 @@ First we have to make multiple authentication support. For that run this command
 <code>composer require hesto/multi-auth</code>
 
 Make Admin Authentication <br>
-<code>php artisan multi-auth:install admin -f --views</code> 
+<code>php artisan multi-auth:install admin -f --views</code> <br>
 this will make migration, Admin Model Class, Login, Registration Controller for you<br>
    
    
@@ -32,8 +32,8 @@ then run this command <br>
 
  After that change guard in config/auth.php file
  
-  
-     'guards' => [
+  ```php
+  'guards' => [
          'admin' => [               //for admin 
              'driver' => 'passport', //passport driver
              'provider' => 'admins', //provider for admin
@@ -63,9 +63,7 @@ then run this command <br>
                  'model' => App\User::class,
              ]
          ],
- 
-     
- </cocde>    
+  ```    
 
 After running this command, **_Laravel\Passport\HasApiTokens_** add the  trait to your **_App\User_** and **_App\User_** model. This trait will provide a few helper methods to your model which allow you to inspect the authenticated user's token and scopes
 <br>
@@ -74,21 +72,26 @@ After running this command, **_Laravel\Passport\HasApiTokens_** add the  trait t
 <br>
 
 
-`namespace App;`<br>
-`use App\Notifications\AdminResetPassword;`<br>
-`use Illuminate\Notifications\Notifiable;`<br>
-`use Illuminate\Foundation\Auth\User as Authenticatable;` <br>
-`use Laravel\Passport\HasApiTokens;` <br> <br>
-`class Admin extends Authenticatable` <br>
-`{`<br>
-    `use Notifiable, HasApiTokens;`<br>
- `....` <br> <br>
+```php
+namespace App;
+use App\Notifications\AdminResetPassword;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
+class Admin extends Authenticatable
+{
+    use Notifiable, HasApiTokens;
+ ....
+
+ ``` 
  
  After that make a controller. Name it as you, for this example i'm going to call id `PasspoerController`. <br>
  
- #PassportController
+ <h2>PassportController</h2>
  
- ```namespace App\Http\Controllers;
+
+ ```php
+ namespace App\Http\Controllers;
  
  use App\Admin; 
  use Illuminate\Http\Request;
@@ -157,11 +160,11 @@ After running this command, **_Laravel\Passport\HasApiTokens_** add the  trait t
  Fro default user you can do the same. <br>
  
  
- ##Route
+ <h2>Route</h2>
  
  For routing go to `routes/api.php` and 
  
- ```angular2html
+ ```php
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -224,6 +227,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
     }
 }
+
 ```
  
  
