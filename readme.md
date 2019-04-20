@@ -14,7 +14,6 @@ I'm using laravel 5.8 for that and also <a href="https://laravel.com/docs/5.8/pa
 First we have to make multiple authentication support. For that run this command <br>
 
 <code>composer require hesto/multi-auth</code>
-<code>composer require hesto/multi-auth</code>
 
 Make Admin Authentication <br>
 <code>php artisan multi-auth:install admin -f --views</code> <br>
